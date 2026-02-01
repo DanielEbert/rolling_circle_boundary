@@ -22,5 +22,4 @@ python main.py
 
 - A window will open showing the generated LIDAR scene.
 - **Red lines** represent the detected outer boundaries.
-- **Green lines** represent the internal graph connections.
 - **Press `Enter`** in the plot window to generate a new random scene.
