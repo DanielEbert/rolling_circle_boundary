@@ -242,16 +242,15 @@ def update_visualization():
     radius_param = 1.2
     edges, adjacency = find_all_connections_within_radius(points, radius_param)
     
-    # 1. Plot all LIDAR points
+    # LIDAR points
     ax.scatter(points[:, 0], points[:, 1], color='gray', s=10, alpha=0.4, 
                label='LIDAR Points', zorder=1)
 
-    # 2. Plot ALL valid connections (edges)
+    # valid connections (edges)
     for i, j in edges:
         p1, p2 = points[i], points[j]
         ax.plot([p1[0], p2[0]], [p1[1], p2[1]], 'g-', linewidth=0.5, alpha=0.3, zorder=1)
     
-    # 3. Find and highlight outer boundary
     boundary_paths = trace_outer_boundaries(points, adjacency)
     
     for b_path in boundary_paths:
@@ -264,12 +263,11 @@ def update_visualization():
         ax.scatter(b_path[:, 0], b_path[:, 1], color='red', s=15, zorder=3)
         
         # Mark start
-        ax.plot(b_path[0, 0], b_path[0, 1], 'bx', markersize=8, markeredgewidth=2, zorder=4)
+        # ax.plot(b_path[0, 0], b_path[0, 1], 'bx', markersize=8, markeredgewidth=2, zorder=4)
 
     # Stats
     total_edges = len(edges)
-    ax.set_title(f"Edges: {total_edges} | Boundaries: {len(boundary_paths)}\n"
-                 f"Note: Single lines are traced A->B->A (double thickness)", fontsize=10)
+    ax.set_title(f"Edges: {total_edges} | Boundaries: {len(boundary_paths)}", fontsize=10)
     
     custom_lines = [
         Line2D([0], [0], color='green', lw=1, alpha=0.3, label='Internal Graph'),
